@@ -3,16 +3,13 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const [list, setList] = useState({});
+  const [list, setList] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(e.target.todo.value);
     const temp = { title: e.target.todo.value, isDone: false };
-    setList((list) => ({
-      ...list,
-      ...temp,
-    }));
+    setList((item) => [...item, temp]);
     console.log(list);
   };
 
@@ -28,9 +25,9 @@ export default function Home() {
         />
         <button type="submit">Submit</button>
       </form>
-      {/* {list.map((listItem) => (
-        <div>{listItem}</div>
-      ))} */}
+      {list.map((listItem) => (
+        <div>{listItem.title}</div>
+      ))}
     </main>
   );
 }
